@@ -19,7 +19,7 @@ class Student(Base):
 
     id = Column(name='s_id', type_=UUID(as_uuid=True), primary_key=True, index=True)
     name = Column(name='s_name', type_=String, nullable=False)
-    branch = Column(name='s_branch', type_=UUID, nullable=False)
+    branch = Column(name='s_branch', type_=UUID(as_uuid=True), nullable=False)
     year = Column(name='s_year', type_=Integer, nullable=False)
     dob = Column(name='s_dob', type_=DATE, nullable=False)
     email = Column(name='s_email', type_=String, nullable=False)

@@ -1,8 +1,9 @@
 from datetime import datetime
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from sqlalchemy.orm import Session
 
+from app.exceptions import EntityNotFoundException
 from app.models import Branch
 from app.schemas import BranchRequest
 
@@ -21,8 +22,12 @@ def create_branch(db: Session, request: BranchRequest):
     return branch
 
 
-def get_branch_by_id(db: Session, branch_id: str):
-    return db.query(Branch).filter(Branch.id == branch_id).first()
+def get_branch_by_id(db: Session, branch_id: UUID):
+    branch = db.query(Branch).filter(Branch.id == branch_id).first()
+    if branch:
+        return branch
+
+    raise EntityNotFoundException('branch', branch_id)
 
 
 def get_all_branches(db: Session):

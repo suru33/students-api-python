@@ -1,12 +1,12 @@
 from datetime import date, datetime
 from uuid import UUID
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, conint, constr
 
 
 class BranchRequest(BaseModel):
-    short_name: str
-    name: str
+    short_name: constr(strict=True, min_length=3, max_length=10)
+    name: constr(strict=True, min_length=3, max_length=100)
 
 
 class BranchResponse(BaseModel):
@@ -21,21 +21,20 @@ class BranchResponse(BaseModel):
 
 
 class StudentRequest(BaseModel):
-    name: str
-    branch: str
-    year: int
-    dob: str
-    email: str
-    phone: str
+    name: constr(strict=True, min_length=3, max_length=100)
+    year: conint(strict=True, ge=1, le=4)
+    dob: date
+    email: EmailStr
+    phone: constr(strict=True, min_length=5, max_length=20)
 
 
 class StudentResponse(BaseModel):
     id: UUID
     name: str
-    branch: str
-    year: int
+    branch: UUID
+    year: conint(strict=True, ge=1, le=4)
     dob: date
-    email: str
+    email: EmailStr
     phone: str
     created_at: datetime
     updated_at: datetime
