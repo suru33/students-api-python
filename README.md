@@ -1,4 +1,4 @@
-# Sample students API using python FastAPI
+# Simple Rest API using Python FastAPI
 
 ### Development server
 
