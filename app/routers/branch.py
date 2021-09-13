@@ -1,7 +1,7 @@
 from typing import List
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from app.dependencies import get_db
@@ -18,10 +18,7 @@ async def get_all_branches(db: Session = Depends(get_db)):
 
 @router.get("/{branch_id}", response_model=BranchResponse)
 async def get_branch_by_id(branch_id: UUID, db: Session = Depends(get_db)):
-    branch = repository.get_branch_by_id(db, branch_id)
-    if branch is None:
-        raise HTTPException(status_code=404, detail="Branch not found")
-    return branch
+    return repository.get_branch_by_id(db, branch_id)
 
 
 @router.post("/", response_model=BranchResponse, status_code=status.HTTP_201_CREATED)
