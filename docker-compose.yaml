@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  students-api-python-db:
+    image: postgres:13.1
+    container_name: students-api-python-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ${PWD}/docker/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "6657:5432"
+    expose:
+      - 6657
