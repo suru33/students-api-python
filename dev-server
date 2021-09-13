@@ -6,4 +6,6 @@ export DB_HOST="localhost:6657"
 export DB_USERNAME=student_user
 export DB_PASSWORD=student_password
 
+alembic upgrade head
+
 uvicorn main:app --reload
