@@ -13,3 +13,18 @@ services:
       - "6657:5432"
     expose:
       - 6657
+
+  students-api-python:
+    depends_on:
+      - students-api-python-db
+    build:
+      context: .
+    container_name: students-api-python
+    environment:
+      DB_HOST: "docker.for.mac.localhost:6657"
+      DB_USERNAME: student_user
+      DB_PASSWORD: student_password
+    ports:
+      - "8620:80"
+    expose:
+      - 8620

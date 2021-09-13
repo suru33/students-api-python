@@ -1,7 +1,13 @@
 # Sample students API using python FastAPI
 
-How to run
+### Development server
 
 ```shell
-uvicorn main:app --reload
+./dev-server
+```
+
+### Run in docker
+
+```shell
+docker compose up
 ```
